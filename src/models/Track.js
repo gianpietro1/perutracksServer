@@ -14,7 +14,6 @@ const pointSchema = new mongoose.Schema({
 
 const landmarksSchema = new mongoose.Schema({
   name: String,
-  shortDescription: String,
   description: String,
   image: String,
   coords: {
@@ -33,6 +32,7 @@ const trackSchema = new mongoose.Schema({
     ref: "User",
   },
   name: String,
+  shortDescription: String,
   description: String,
   image: String,
   video: String,
