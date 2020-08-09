@@ -15,7 +15,7 @@ router.get("/tracks", async (req, res) => {
 });
 
 router.post("/tracks", async (req, res) => {
-  const { name, locations } = req.body;
+  const { name, locations, landmarks } = req.body;
   if (!name || !locations) {
     return res
       .status(422)
@@ -24,12 +24,19 @@ router.post("/tracks", async (req, res) => {
 
   try {
     //const track = new Track({ name, locations, userId: req.user._id });
-    const track = new Track({ name, locations });
+    const track = new Track({ name, locations, landmarks });
     await track.save();
     res.send(track);
   } catch (err) {
     res.status(422).send({ error: err.message });
   }
+});
+
+router.put("/tracks/:id", async (req, res) => {
+  const track = await Track.findOne({ _id: req.params.id });
+  Object.assign(track, req.body);
+  await track.save();
+  res.send(track);
 });
 
 module.exports = router;

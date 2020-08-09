@@ -16,6 +16,7 @@ const landmarksSchema = new mongoose.Schema({
   name: String,
   description: String,
   image: String,
+  type: String,
   coords: {
     latitude: Number,
     longitude: Number,
