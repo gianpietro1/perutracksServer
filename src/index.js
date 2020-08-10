@@ -7,6 +7,7 @@ const authRoutes = require("./routes/authRoutes");
 const trackRoutes = require("./routes/trackRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
 const requireAuth = require("./middlewares/requireAuth");
+const keys = require("./config/keys");
 
 const app = express();
 
@@ -15,9 +16,7 @@ app.use(authRoutes);
 app.use(trackRoutes);
 app.use(uploadRoutes);
 
-const mongoUri =
-  "mongodb+srv://gianpietro:SRlp5XmWKxtIlcDp@emaily-osac0.mongodb.net/trackapp?retryWrites=true&w=majority";
-mongoose.connect(mongoUri, {
+mongoose.connect(keys.mongoURI, {
   useNewUrlParser: true,
   useCreateIndex: true,
 });
@@ -32,4 +31,4 @@ app.get("/", requireAuth, (req, res) => {
   res.send(`Your email: ${req.user.email}`);
 });
 
-app.listen(3000, () => {}, "192.168.0.10");
+app.listen(process.env.PORT || 3000);
