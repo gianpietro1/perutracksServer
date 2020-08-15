@@ -12,7 +12,7 @@ const s3 = new AWS.S3({
 });
 
 router.get("/upload", (req, res) => {
-  let baseDir = "tracks";
+  let baseDir = req.query.type || "tracks";
   let fileName = `${uuid()}.jpeg`;
 
   let key = `${baseDir}/${fileName}`;
